@@ -1,0 +1,18 @@
+tools:
+  list_actor_movies:
+    kind: neo4j-cypher
+    source: my-neo4j-source
+    statement: |
+      MATCH (p:Person {name: $name})-[:Acted_In]->(m:Movie)
+      RETURN m.title AS title
+      LIMIT 10
+    description: |
+      List a few movies the given actor appeared in.
+      Example:
+      {
+        "name": "Tom Hanks"
+      }
+    parameters:
+      - name: name
+        type: string
+        description: Full name of the actor (e.g. "Tom Hanks")
